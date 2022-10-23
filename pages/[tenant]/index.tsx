@@ -1,6 +1,8 @@
+import { GetServerSideProps } from "next";
 import { Banner } from "../../components/Banner";
 import { ProductItem } from "../../components/ProductItem";
 import { SearchInput } from "../../components/SearchInput";
+import { useApi } from "../../libs/useApi";
 import styles from "../../styles/Home.module.css";
 
 const Home = () => {
@@ -83,3 +85,34 @@ const Home = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { tenant: tenantSlug } = context.query;
+  const api = useApi();
+
+  if (!tenantSlug) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  const tenant = await api.getTenant(tenantSlug as string);
+
+  if (!tenant) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      tenant,
+    },
+  };
+};
