@@ -2,11 +2,11 @@ import { useState } from "react";
 import styles from "./styles.module.css";
 
 type Props = {
-  mainColor: string;
+  primaryColor: string;
   onSearch: (searchValue: string) => void;
 };
 
-export const SearchInput = ({ mainColor, onSearch }: Props) => {
+export const SearchInput = ({ primaryColor, onSearch }: Props) => {
   const [focused, sedFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
@@ -20,7 +20,7 @@ export const SearchInput = ({ mainColor, onSearch }: Props) => {
     <div
       className={styles.container}
       style={{
-        borderColor: focused ? mainColor : "#FFF",
+        borderColor: focused ? primaryColor : "#FFF",
       }}
     >
       <div
