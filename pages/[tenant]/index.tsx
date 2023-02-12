@@ -1,8 +1,9 @@
 import { GetServerSideProps } from "next";
+import { Tenant } from "../../@types/Tenent";
 import { Banner } from "../../components/Banner";
 import { ProductItem } from "../../components/ProductItem";
 import { SearchInput } from "../../components/SearchInput";
-import { getTenantResponse, useApi } from "../../libs/useApi";
+import { useApi } from "../../libs/useApi";
 import styles from "../../styles/Home.module.css";
 
 const Home = (data: Props) => {
@@ -99,7 +100,7 @@ const Home = (data: Props) => {
 export default Home;
 
 type Props = {
-  tenant: getTenantResponse;
+  tenant: Tenant;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

@@ -18,6 +18,7 @@ export const useAppContext = () => useContext(appContext);
 type Props = {
   children: ReactNode;
 };
+
 export const AppContextProvider = ({ children }: Props) => {
   const [tenant, setTenant] = useState<Tenant | null>(null);
 
