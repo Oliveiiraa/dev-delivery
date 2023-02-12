@@ -1,12 +1,20 @@
 import { GetServerSideProps } from "next";
+import { useEffect } from "react";
 import { Tenant } from "../../@types/Tenent";
 import { Banner } from "../../components/Banner";
 import { ProductItem } from "../../components/ProductItem";
 import { SearchInput } from "../../components/SearchInput";
+import { useAppContext } from "../../contexts/AppContext";
 import { useApi } from "../../libs/useApi";
 import styles from "../../styles/Home.module.css";
 
 const Home = (data: Props) => {
+  const { tenant, setTenant } = useAppContext();
+
+  useEffect(() => {
+    setTenant(data.tenant);
+  }, []);
+
   const handleSearch = (searchValue: string) => {
     console.log(searchValue);
   };
@@ -24,24 +32,21 @@ const Home = (data: Props) => {
             <div className={styles.menuButton}>
               <div
                 className={styles.menuButtonLine}
-                style={{ backgroundColor: data.tenant.primaryColor }}
+                style={{ backgroundColor: tenant?.primaryColor }}
               ></div>
               <div
                 className={styles.menuButtonLine}
-                style={{ backgroundColor: data.tenant.primaryColor }}
+                style={{ backgroundColor: tenant?.primaryColor }}
               ></div>
               <div
                 className={styles.menuButtonLine}
-                style={{ backgroundColor: data.tenant.primaryColor }}
+                style={{ backgroundColor: tenant?.primaryColor }}
               ></div>
             </div>
           </div>
         </div>
         <div className={styles.headerBottom}>
-          <SearchInput
-            primaryColor={data.tenant.primaryColor}
-            onSearch={handleSearch}
-          />
+          <SearchInput onSearch={handleSearch} />
         </div>
       </header>
 
@@ -56,8 +61,6 @@ const Home = (data: Props) => {
             name: "Texas Burger",
             price: "R$ 19,90",
           }}
-          primaryColor={data.tenant.primaryColor}
-          secondaryColor={data.tenant.secondaryColor}
         />
         <ProductItem
           data={{
@@ -67,8 +70,6 @@ const Home = (data: Props) => {
             name: "Texas Burger",
             price: "R$ 19,90",
           }}
-          primaryColor={data.tenant.primaryColor}
-          secondaryColor={data.tenant.secondaryColor}
         />
         <ProductItem
           data={{
@@ -78,8 +79,6 @@ const Home = (data: Props) => {
             name: "Texas Burger",
             price: "R$ 19,90",
           }}
-          primaryColor={data.tenant.primaryColor}
-          secondaryColor={data.tenant.secondaryColor}
         />
         <ProductItem
           data={{
@@ -89,8 +88,6 @@ const Home = (data: Props) => {
             name: "Texas Burger",
             price: "R$ 19,90",
           }}
-          primaryColor={data.tenant.primaryColor}
-          secondaryColor={data.tenant.secondaryColor}
         />
       </div>
     </div>
