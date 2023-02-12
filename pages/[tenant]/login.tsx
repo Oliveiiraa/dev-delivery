@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Tenant } from "../../@types/Tenent";
+import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { InputField } from "../../components/InputField";
 import { useAppContext } from "../../contexts/AppContext";
@@ -12,6 +13,8 @@ const Login = (data: Props) => {
   const { tenant, setTenant } = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {};
 
   useEffect(() => {
     setTenant(data.tenant);
@@ -34,12 +37,20 @@ const Login = (data: Props) => {
         value={email}
         onChange={setEmail}
       />
+
       <InputField
         color={data.tenant.primaryColor}
         placeholder={"Digite sua senha"}
         value={password}
         onChange={setPassword}
         isPassword
+      />
+
+      <Button
+        color={data.tenant.primaryColor}
+        label="Entrar"
+        onClick={handleSubmit}
+        fill
       />
     </div>
   );
